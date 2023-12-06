@@ -2,7 +2,7 @@ local opt = vim.opt
 local g = vim.g
 
 --- globals ---
-g.theme = "monokai-pro"
+g.theme = "gruvbox"
 -- g.theme_variant = ""
 -- g.theme_mode = "dark" -- "dark" | "light"
 -- g.theme_transparency = false
