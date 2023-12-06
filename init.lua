@@ -1,1 +1,2 @@
-print("hola")
+require("core")
+require("plugins")

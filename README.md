@@ -37,6 +37,14 @@
 
         * lualine:          nvim-lualine/lualine.nvim
         * markdown-preview: iamcco/markdown-preview.nvim
+        * vim-startuptime:  dstein64/vim-startuptime
+
+        ** Themes
+
+        * monokai-pro:     loctvl842/monokai-pro.nvim
+        * gruvbox:         ellisonleao/gruvbox.nvim
+        * sonokai:         sainnhe/sonokai
+        * tokionight:      folke/tokyonight.nvim
 
     -- language-servers:
 
