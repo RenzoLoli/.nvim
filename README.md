@@ -26,18 +26,29 @@
         ** LSP
 
         * nvim-lspconfig:   neovim/nvim-lspconfig 
-        * nvim-lsp:         hrsh7th/nvim-lsp
+        * nvim-cmp:         hrsh7th/nvim-cmp
         * cmp-buffer:       hrsh7th/cmp-buffer
+        * cmp-path:         hrsh7th/cmp-path
+        * cmp-cmdline:      hrsh7th/cmp-cmdline
         * cmp-nvim-lsp:     hrsh7th/cmp-nvim-lsp
+        * cmp-vsnip:        hrsh7th/cmp-vsnip
+        * vim-vsnip:        hrsh7th/vim-vsnip
         * lspkind:          onsails/lspkind.nvim
         * nvim-lint:        mfussenegger/nvim-lint
         * formatter:        mhartington/formatter.nvim
+
+        ** Lsp Signature (!choose)
+
+        * lspsaga.nvim       nvimdev/lspsaga.nvim
+        * lsp_signature.nvim ray-x/lsp_signature.nvim
 
         ** Complements
 
         * lualine:          nvim-lualine/lualine.nvim
         * markdown-preview: iamcco/markdown-preview.nvim
         * vim-startuptime:  dstein64/vim-startuptime
+        * treesitter:       nvim-treesitter/nvim-treesitter
+        * nvim-tree:        nvim-tree/nvim-tree.lua
 
         ** Themes
 
@@ -121,3 +132,7 @@
             - linter:       cmakelint
 
 
+        ** what's next????
+
+        -- improve "telescope-import" because doesn't work with lua or any regex custom_language
+        -- fix telescope default extensions "where are they? | not downloaded" error

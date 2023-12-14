@@ -5,7 +5,7 @@ local M = {}
 
 M.echo = function(str)
   vim.cmd "redraw"
-  vim.api.nvim_echo({ { str, "bold" }, true, {} })
+  vim.api.nvim_echo({ { str, "bold" } }, true, {})
 end
 
 M.shell_call = function(args)
@@ -76,6 +76,67 @@ M.list_themes = function(_mode)
   end
 
   return full_themes
+end
+
+M.mapper = function(modes, bind, action, opts)
+  if type(modes) == "string" then
+    vim.keymap.set(modes, bind, action, opts)
+  elseif type(modes) == "table" then
+    for _, mode in ipairs(modes) do
+      vim.keymap.set(mode, bind, action, opts)
+    end
+  else
+    error("mapper - mode argument must be a string or a list of strings ")
+  end
+end
+
+M.setup_lsp_server = function(server)
+  local lsp = require("lspconfig")
+  local ok, opts = pcall(require, "plugins.configs.lsp." .. server)
+
+  if not ok then
+    return
+  end
+
+  if not is_empty(opts.active) and not opts.active then
+    return
+  end
+
+  lsp[server].setup(opts)
+end
+
+M.setup_servers = function()
+  local languages = require("plugins.configs.languages")
+
+  local servers = languages.get_servers()
+
+  for _, server in ipairs(servers) do
+    M.setup_lsp_server(server)
+  end
+
+end
+
+M.update_variable = function(varname, to)
+  local path = vim.fn.stdpath("config") .. "core/init.lua"
+  local file, _ = io.open(path, "r+")
+
+  if not file then
+    error("Cannot read 'core/init.lua'")
+    return
+  end
+
+  local str = file:read("*a")
+  file:close()
+
+  str = str.gsub(varname.. "%s*=%s*\"[^\"]*\"", varname..' = "' .. to .. '"')
+  file, _ = io.open(file, "w")
+
+  if not file then
+    error("Cannot write on 'core/init.lua'")
+  end
+
+  file:write(str)
+  file:close()
 end
 
 return M

@@ -4,7 +4,7 @@ local g = vim.g
 --- globals ---
 g.theme = "gruvbox"
 -- g.theme_variant = ""
--- g.theme_mode = "dark" -- "dark" | "light"
+g.theme_mode = "dark" -- "dark" | "light"
 -- g.theme_transparency = false
 
 -- mapping
@@ -79,9 +79,16 @@ new_cmd("Hello", function()
   print("Hello")
 end, {})
 
-new_cmd("ReloadTheme", function()
+new_cmd("ZorReloadCore", function()
+  local vimpath = vim.fn.stdpath "config"
+  vim.cmd("source " .. vimpath .. "/lua/core/init.lua")
   require("core.utils").load_theme()
 end, {})
 
-require("core.mappings")
+new_cmd("ZorListThemes", function()
+  local themes = require("core.utils").list_themes("full")
+  require("core.utils").echo(table.concat(themes, "\n"))
+end, {})
 
+-------------------------------------- post core ------------------------------------------
+require("core.mappings")

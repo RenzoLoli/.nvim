@@ -1,8 +1,16 @@
 return {
-   defaults = { lazy = true },
+  defaults = { lazy = true },
 
-   --[[
-     performance = {
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
+
+  performance = {
     rtp = {
       disabled_plugins = {
         "2html_plugin",
@@ -35,5 +43,4 @@ return {
       },
     },
   },
-  --]]
 }
