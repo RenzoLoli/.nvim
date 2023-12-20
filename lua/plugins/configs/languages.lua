@@ -26,7 +26,7 @@ M.all = {
     },
 
     ["rust"] = {
-        server = "rust-analyzer",
+        server = "rust_analyzer",
         formatter = "rustfmt",
         linter = "_"
     },

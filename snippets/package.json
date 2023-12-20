@@ -1,0 +1,19 @@
+{
+	"name": "ZorSnippets",
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"all"
+				],
+				"path": "./all/default.json"
+			},
+			{
+				"language": [
+					"lua"
+				],
+				"path": "./lua/default.json"
+			},
+		]
+	}
+}

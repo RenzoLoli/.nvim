@@ -26,13 +26,13 @@ local M = {
         "hrsh7th/cmp-cmdline"
       },
       {
-        "hrsh7th/cmp-vsnip"
-      },
-      {
-        "hrsh7th/vim-vsnip"
+        "saadparwaiz1/cmp_luasnip"
       },
       {
         "hrsh7th/cmp-nvim-lsp"
+      },
+      {
+        "hrsh7th/cmp-nvim-lua"
       },
       {
         "onsails/lspkind.nvim"
@@ -59,6 +59,22 @@ local M = {
     "dstein64/vim-startuptime",
     lazy = false
   },
+  { 'RaafatTurki/hex.nvim',
+    config = function (_, _)
+      require("hex").setup()
+    end,
+    lazy = false
+  },
+  {
+    "mbbill/undotree",
+    config = function(_, _)
+      vim.cmd [[
+        let g:undotree_WindowLayout = 2
+        let g:undotree_SetFocusWhenToggle = 1
+      ]]
+    end,
+    lazy = false,
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
@@ -77,7 +93,7 @@ local M = {
     dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
       { "nvim-telescope/telescope-fzf-native.nvim" },
-      { "piersolenski/telescope-import.nvim" }
+      { "piersolenski/telescope-import.nvim" },
     },
     cmd = "Telescope",
     opts = function()

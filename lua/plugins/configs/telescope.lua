@@ -49,7 +49,9 @@ local options = {
     },
   },
 
-  extensions_list = { --[["themes", "terms", "fzf"--]] },
+  extensions_list = {
+    "import"
+  },
   extensions = {
     fzf = {
       fuzzy = true,
@@ -71,7 +73,7 @@ local options = {
           extensions = { "js", "ts" },
         },
         {
-          regex = [[\blocal\b]],
+          regex = [[^%s*require%s*%(.-%)]],
           filetypes = { "lua" },
           extensions = { "lua" },
         },
@@ -81,4 +83,3 @@ local options = {
 }
 
 return options
-

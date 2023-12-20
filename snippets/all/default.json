@@ -1,0 +1,8 @@
+{
+	"Hello": {
+		"prefix": "hello",
+		"body": [
+			"\"Hello World!\""
+		]
+	}
+}

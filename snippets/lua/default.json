@@ -1,0 +1,14 @@
+{
+	"import": {
+		"prefix": "require",
+		"body": [
+			"local $1 = require(\"$2\")"
+		]
+	},
+	"assert": {
+		"prefix": "assert",
+		"body": [
+			"assert($1,$2) -- ass"
+		]
+	}
+}

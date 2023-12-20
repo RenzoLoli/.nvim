@@ -2,6 +2,8 @@ return {
   setup = function (opts)
   require("luasnip").config.set_config(opts)
 
+  vim.g.vscode_snippets_path = vim.fn.stdpath("config") .. "/snippets"
+
   -- vscode format
   require("luasnip.loaders.from_vscode").lazy_load()
   require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
