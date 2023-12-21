@@ -1,19 +1,49 @@
 local mapper = require("core.utils").mapper
 
 mapper("n", "<leader>w", "<cmd> w! <CR>", { desc = "save file" })
+mapper("n", "<c-s>", "<cmd> w! <CR>", { desc = "save file" })
 mapper("n", "<leader>q", "<cmd> close <CR>", { desc = "close buffer" })
 mapper("n", "<leader>E", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
 mapper("n", "<leader>e", "<cmd> NvimTreeFocus <CR>", { desc = "focus nvimtree" })
 mapper("n", "<leader>fu", "<cmd> UndotreeToggle <CR>", { desc = "toggle undotree" })
 
-mapper('n', '<leader>y', ':normal! "*y<cr>', { noremap = true, silent = true })
-mapper('n', '<leader>Y', ':normal! "+y<cr>', { noremap = true, silent = true })
+-- reemplazar texto
+vim.keymap.set("v", "<C-r>", '"hy:%s/<C-r>h//gI<left><left><left>')
+vim.keymap.set("n", "<C-r>", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+
+-- clipboard copy
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "Y", "yg$")
+
+-- paste
 mapper('n', '<leader>p', ':normal! "*p<cr>', { noremap = true, silent = true })
 mapper('n', '<leader>P', ':normal! "+p<cr>', { noremap = true, silent = true })
 mapper("x", "<leader>p", [["_dP]], { noremap = true, silent = true })
 mapper("x", "<leader>p", [["_dP]], { noremap = true, silent = true })
 mapper("x", "<leader>p", [["_dP]], { noremap = true, silent = true })
+
+-- tmux
 mapper("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { noremap = true, silent = true })
+
+-- mover texto
+vim.keymap.set("v", "<A-j>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("n", "<A-j>", "V:m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<A-k>", "V:m '>+1<CR>gv=gv")
+
+-- mejor mobilidad
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- pegado sin superposicion solo 1 vez
+vim.keymap.set("x", "<leader>p", "\"_dP")
+
+-- telescope
 
 mapper("n", "<leader>fe", "<cmd> Telescope find_files <CR>", { noremap = true, silent = true })
 mapper("n", "<leader>ft", "<cmd> Telescope builtin include_extensions=true <CR>", { noremap = true })
