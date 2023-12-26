@@ -1,97 +1,98 @@
 local M = {}
 
 M.all = {
-    ["cpp"] = {
-        server = "clangd",
-        formatter = "clang-format",
-        linter = "clang-tidy"
-    },
 
-    ["c"] = {
-        server = "clangd",
-        formatter = "clang-format",
-        linter = "clang-tidy"
-    },
+  ["angular"] = {
+    server = "angularls",
+    formatter = "_",
+    linter = "eslint_d"
+  },
 
-    ["python"] = {
-        server = "pyright",
-        formatter = "black",
-        linter = "flake8" -- ruff
-    },
+  ["cpp"] = {
+    server = "clangd",
+    formatter = "clang-format",
+    linter = "clang-tidy"
+  },
 
-    ["lua"] = {
-        server = "lua_ls",
-        formatter = "stylua",
-        linter = "luacheck"
-    },
+  ["c"] = {
+    server = "clangd",
+    formatter = "clang-format",
+    linter = "clang-tidy"
+  },
 
-    ["rust"] = {
-        server = "rust_analyzer",
-        formatter = "rustfmt",
-        linter = "_"
-    },
+  ["python"] = {
+    server = "pyright",
+    formatter = "black",
+    linter = "flake8"     -- ruff
+  },
 
-    ["javascript"] = {
-        server = "tsserver",
-        formatter = "clang-format", -- prettierd
-        linter = "eslint_d"
-    },
+  ["lua"] = {
+    server = "lua_ls",
+    formatter = "stylua",
+    linter = "luacheck"
+  },
 
-    ["typescript"] = {
-        server = "tsserver",
-        formatter = "clang-format", -- prettierd
-        linter = "eslint_d"
-    },
+  ["rust"] = {
+    server = "rust_analyzer",
+    formatter = "rustfmt",
+    linter = "_"
+  },
 
-    ["html"] = {
-        server = "html",
-        formatter = "prettierd",
-        linter = "tidy"
-    },
+  ["javascript"] = {
+    server = "tsserver",
+    formatter = "clang-format",     -- prettierd
+    linter = "eslint_d"
+  },
 
-    ["css"] = {
-        server = "cssls",
-        formatter = "prettierd",
-        linter = "stylelint"
-    },
+  ["typescript"] = {
+    server = "tsserver",
+    formatter = "clang-format",     -- prettierd
+    linter = "eslint_d"
+  },
 
-    ["angular"] = {
-        server = "angularls",
-        formatter = "_",
-        linter = "eslint_d"
-    },
+  ["html"] = {
+    server = "html",
+    formatter = "prettierd",
+    linter = "tidy"
+  },
 
-    ["react"] = {
-        server = "tsserver",
-        formatter = "stylua",
-        linter = "luacheck"
-    },
+  ["css"] = {
+    server = "cssls",
+    formatter = "prettierd",
+    linter = "stylelint"
+  },
 
-    ["markdown"] = {
-        server = "marksman",
-        formatter = "prettierd",
-        linter = "vale"
-    },
+  ["react"] = {
+    server = "tsserver",
+    formatter = "stylua",
+    linter = "luacheck"
+  },
 
-    ["zsh"] = {
-        server = "bashls",
-        formatter = "beautysh",
-        linter = "zsh"
-    },
+  ["markdown"] = {
+    server = "marksman",
+    formatter = "prettierd",
+    linter = "vale"
+  },
 
-    ["cmake"] = {
-        server = "cmake",
-        formatter = "cmakeformat",
-        linter = "cmakelint"
-    }
+  ["zsh"] = {
+    server = "bashls",
+    formatter = "beautysh",
+    linter = "zsh"
+  },
+
+  ["cmake"] = {
+    server = "cmake",
+    formatter = "cmakeformat",
+    linter = "cmakelint"
+  }
 }
 
 function to_list(group)
   local result = {}
   local set = {}
-  
+
   for _, config in pairs(M.all) do
-    if config[group] and not set[config[group]]  then
+    if config[group] and not set[config[group]] then
       table.insert(result, config[group])
       set[config[group]] = true
     end
@@ -110,6 +111,14 @@ end
 
 M.get_formatters = function()
   return to_list("formatter")
+end
+
+M.get_languages = function()
+  local keys = {}
+  for key, _ in pairs(M.all) do
+    table.insert(keys, key)
+  end
+  return keys
 end
 
 return M

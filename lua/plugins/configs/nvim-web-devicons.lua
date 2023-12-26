@@ -1,4 +1,4 @@
-return {
+local opts =  {
   default_icon = {
     icon = "󰈚",
     name = "Default",
@@ -143,4 +143,14 @@ return {
     icon = "",
     name = "zip",
   },
+}
+
+return {
+    "nvim-tree/nvim-web-devicons",
+    config = function(_, _)
+      local default_icons = require("nvim-web-devicons").get_icons()
+      local extend = vim.tbl_deep_extend("force", default_icons, opts)
+
+      require("nvim-web-devicons").setup({ override = extend })
+    end
 }

@@ -10,17 +10,33 @@ end
 
 M.shell_call = function(args)
   local output = fn.system(args)
-  assert(vim. ev.shell_error == 0, "External call failed with error code: " .. vim.v.shell_error .. "\n" .. output)
+  assert(vim.ev.shell_error == 0, "External call failed with error code: " .. vim.v.shell_error .. "\n" .. output)
+  return output
+end
+
+M.which = function(command)
+    local is_windows = vim.fn.has("win32") == 1
+
+    local cmd = is_windows and "where " or "which "
+    local output = vim.fn.system(cmd .. command)
+    return vim.fn.trim(output)
 end
 
 M.load_manager = function()
   local list = require("plugins.list")
-  require("plugins.manager").setup(list)
+  local mapped = {}
+  for _, plug in ipairs(list) do
+    local plugin = require("plugins.configs." .. plug)
+    table.insert(mapped, plugin)
+  end
+
+  require("plugins.manager").setup(mapped)
 end
 
 function is_empty(value)
   return value == nil or value == ""
 end
+
 M.load_theme = function()
   local themes = require("core.themes")
 
@@ -57,11 +73,11 @@ end
 M.list_themes = function(_mode)
   local _themes = require("core.themes")
   local themes = _themes.themes
-  local modes = {"full", "default"}
+  local modes = { "full", "default" }
   local mode = "default" -- "full" | "default"
   if not is_empty(_mode) then
     mode = _mode
-    assert(vim.tbl_contains(modes, mode), "incorrect theme getter mode, try ".. vim.inspect(modes))
+    assert(vim.tbl_contains(modes, mode), "incorrect theme getter mode, try " .. vim.inspect(modes))
   end
 
   local full_themes = {}
@@ -113,7 +129,6 @@ M.setup_servers = function()
   for _, server in ipairs(servers) do
     M.setup_lsp_server(server)
   end
-
 end
 
 M.update_variable = function(varname, to)
@@ -128,7 +143,7 @@ M.update_variable = function(varname, to)
   local str = file:read("*a")
   file:close()
 
-  str = str.gsub(varname.. "%s*=%s*\"[^\"]*\"", varname..' = "' .. to .. '"')
+  str = str.gsub(varname .. "%s*=%s*\"[^\"]*\"", varname .. ' = "' .. to .. '"')
   file, _ = io.open(file, "w")
 
   if not file then

@@ -1,4 +1,4 @@
-local config = {
+local global_config = {
   disabled = false,
   silent = false
 }
@@ -79,14 +79,14 @@ local open_signature = function()
       vim.lsp.with(M.signature_window, {
         border = "single",
         focusable = false,
-        silent = config.silent,
+        silent = global_config.silent,
       })
     )
   end
 end
 
 M.setup = function(client)
-  if config.disabled then
+  if global_config.disabled then
     return
   end
   table.insert(clients, client)
@@ -99,7 +99,7 @@ M.setup = function(client)
     callback = function()
       -- Guard against spamming of method not supported after
       -- stopping a language serer with LspStop
-      local active_clients = vim.lsp.get_active_clients()
+      local active_clients = vim.lsp.get_clients()
       if #active_clients < 1 then
         return
       end

@@ -12,9 +12,11 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-return {
-  setup = function(plugins)
-    local config = require("plugins.configs.lazy")
-    require("lazy").setup(plugins, config)
-  end
-}
+local M = {}
+
+M.setup = function(plugins)
+  local config = require("plugins.configs.lazy")
+  require("lazy").setup(plugins, config)
+end
+
+return M

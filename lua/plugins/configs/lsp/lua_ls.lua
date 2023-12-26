@@ -1,4 +1,5 @@
-local opts = require("plugins.configs.lspconfig")
+local opts = require("plugins.addons.lspdefaults")
+
 local to_fullpath_expand_paths = function(paths)
   local full_expand = ""
 

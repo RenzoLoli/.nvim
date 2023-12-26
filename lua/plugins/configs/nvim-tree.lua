@@ -1,4 +1,4 @@
-return {
+local opts = {
   filters = {
     dotfiles = false,
     -- exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
@@ -72,4 +72,13 @@ return {
       },
     },
   },
+}
+
+return {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    config = function(_, _)
+      require("nvim-tree").setup(opts)
+    end,
+    lazy = false
 }

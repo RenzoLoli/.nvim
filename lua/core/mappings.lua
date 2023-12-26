@@ -22,23 +22,20 @@ mapper('n', '<leader>p', ':normal! "*p<cr>', { noremap = true, silent = true })
 mapper('n', '<leader>P', ':normal! "+p<cr>', { noremap = true, silent = true })
 mapper("x", "<leader>p", [["_dP]], { noremap = true, silent = true })
 mapper("x", "<leader>p", [["_dP]], { noremap = true, silent = true })
-mapper("x", "<leader>p", [["_dP]], { noremap = true, silent = true })
 
 -- tmux
 mapper("n", "<c-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { noremap = true, silent = true })
 
 -- mover texto
-vim.keymap.set("v", "<A-j>", ":m '<-2<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("n", "<A-j>", "V:m '<-2<CR>gv=gv")
-vim.keymap.set("n", "<A-k>", "V:m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("n", "<A-k>", "V:m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<A-j>", "V:m '>+1<CR>gv=gv")
 
 -- mejor mobilidad
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
 
 -- pegado sin superposicion solo 1 vez
 vim.keymap.set("x", "<leader>p", "\"_dP")
@@ -46,6 +43,7 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 -- telescope
 
 mapper("n", "<leader>fe", "<cmd> Telescope find_files <CR>", { noremap = true, silent = true })
+mapper("n", "<leader>fb", "<cmd> Telescope buffers <CR>", { noremap = true, silent = true })
 mapper("n", "<leader>ft", "<cmd> Telescope builtin include_extensions=true <CR>", { noremap = true })
 
 -- LSP
