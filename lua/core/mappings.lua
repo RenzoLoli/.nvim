@@ -1,11 +1,26 @@
 local mapper = require("core.utils").mapper
 
-mapper("n", "<leader>w", "<cmd> w! <CR>", { desc = "save file" })
 mapper("n", "<c-s>", "<cmd> w! <CR>", { desc = "save file" })
 mapper("n", "<leader>q", "<cmd> close <CR>", { desc = "close buffer" })
 mapper("n", "<leader>E", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
 mapper("n", "<leader>e", "<cmd> NvimTreeFocus <CR>", { desc = "focus nvimtree" })
 mapper("n", "<leader>fu", "<cmd> UndotreeToggle <CR>", { desc = "toggle undotree" })
+
+-- split window
+mapper("n", "ss", ":split<CR>", { desc = "split horizontal" })
+mapper("n", "sv", ":vsplit<CR>", { desc = "split vertical" })
+
+-- resize window
+mapper("n", "<C-w><left>", "<C-w><", { desc = "resize left" })
+mapper("n", "<C-w><right>", "<C-w>>", { desc = "resize right" })
+mapper("n", "<C-w><up>", "<C-w>+", { desc = "resize up" })
+mapper("n", "<C-w><down>", "<C-w>-", { desc = "resize down" })
+
+-- resize window
+mapper("n", "sh", "<C-w>h", { desc = "split horizontal" })
+mapper("n", "sj", "<C-w>j", { desc = "split vertical" })
+mapper("n", "sk", "<C-w>k", { desc = "split vertical" })
+mapper("n", "sl", "<C-w>l", { desc = "split vertical" })
 
 -- reemplazar texto
 vim.keymap.set("v", "<C-r>", '"hy:%s/<C-r>h//gI<left><left><left>')

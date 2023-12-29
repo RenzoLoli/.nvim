@@ -6,7 +6,6 @@ M.on_attach = function(client, buffr)
 
   if client.server_capabilities.signatureHelpProvider then
     -- aditional information on cmp
-    print("entro")
     require("plugins.addons.lspsignature").setup(client)
   end
 
@@ -14,9 +13,11 @@ M.on_attach = function(client, buffr)
     -- threesitter is better highlight
     client.server_capabilities.semanticTokensProvider = nil
   end
+
+  client.server_capabilities.codeActionProvider.resolveProvider = true
 end
 
-M.capabilities = require('cmp_nvim_lsp').default_capabilities()
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 M.capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },

@@ -15,11 +15,11 @@ M.shell_call = function(args)
 end
 
 M.which = function(command)
-    local is_windows = vim.fn.has("win32") == 1
+  local is_windows = vim.fn.has("win32") == 1
 
-    local cmd = is_windows and "where " or "which "
-    local output = vim.fn.system(cmd .. command)
-    return vim.fn.trim(output)
+  local cmd = is_windows and "where " or "which "
+  local output = vim.fn.system(cmd .. command)
+  return vim.fn.trim(output)
 end
 
 M.load_manager = function()
@@ -103,31 +103,6 @@ M.mapper = function(modes, bind, action, opts)
     end
   else
     error("mapper - mode argument must be a string or a list of strings ")
-  end
-end
-
-M.setup_lsp_server = function(server)
-  local lsp = require("lspconfig")
-  local ok, opts = pcall(require, "plugins.configs.lsp." .. server)
-
-  if not ok then
-    return
-  end
-
-  if not is_empty(opts.active) and not opts.active then
-    return
-  end
-
-  lsp[server].setup(opts)
-end
-
-M.setup_servers = function()
-  local languages = require("plugins.configs.languages")
-
-  local servers = languages.get_servers()
-
-  for _, server in ipairs(servers) do
-    M.setup_lsp_server(server)
   end
 end
 

@@ -1,6 +1,8 @@
 local M = {
   "themes",
   "other",
+  "lualine",
+  "bufferline",
   "lspconfig",
   "cmp",
   "nvim-web-devicons",

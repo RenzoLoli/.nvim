@@ -40,17 +40,50 @@ M.setup = function()
   end
 end
 
+M.setup_lsp_server = function(server)
+  local lsp = require("lspconfig")
+  local ok, opts = pcall(require, "plugins.configs.lsp." .. server)
+
+  if not ok then
+    return
+  end
+
+  if not is_empty(opts.active) and not opts.active then
+    return
+  end
+
+  lsp[server].setup(opts)
+end
+
+M.setup_servers = function()
+  local languages = require("plugins.configs.languages")
+
+  local servers = languages.get_servers()
+
+  for _, server in ipairs(servers) do
+    M.setup_lsp_server(server)
+  end
+end
+
 
 return {
   "neovim/nvim-lspconfig",
+  event = "BufRead",
   dependencies = {
     {
       "hrsh7th/cmp-nvim-lsp"
+    },
+    {
+      'kosayoda/nvim-lightbulb',
+      config = function(_, _)
+        require("nvim-lightbulb").setup({
+          autocmd = { enabled = true }
+        })
+      end
     }
   },
   config = function(_, _)
+    M.setup_servers()
     M.setup()
-    require('core.utils').setup_servers()
   end,
-  lazy = false
 }

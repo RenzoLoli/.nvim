@@ -2,12 +2,6 @@ local M = {}
 
 M.all = {
 
-  ["angular"] = {
-    server = "angularls",
-    formatter = "_",
-    linter = "eslint_d"
-  },
-
   ["cpp"] = {
     server = "clangd",
     formatter = "clang-format",
@@ -54,6 +48,18 @@ M.all = {
     server = "html",
     formatter = "prettierd",
     linter = "tidy"
+  },
+
+  ["json"] = {
+    server = "jsonls",
+    formatter = "_",
+    linter = "_"
+  },
+
+  ["angular"] = {
+    server = "angularls",
+    formatter = "_",
+    linter = "eslint_d"
   },
 
   ["css"] = {

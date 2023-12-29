@@ -52,7 +52,7 @@ function g_options()
 
   return {
     completion = {
-      completeopt = "menu,menuonepreviewk,nolect",
+      completeopt = "menu,menuone,preview,nolect",
     },
 
     window = {
@@ -145,15 +145,14 @@ return {
     },
     {
       "L3MON4D3/LuaSnip",
-      dependencies = "rafamadriz/friendly-snippets",
+      dependencies = { "rafamadriz/friendly-snippets" },
       opts = { history = true, updateevents = "TextChanged, TextchangedI" },
       config = function(_, opts)
         require("plugins.configs.luasnip").setup(opts)
-      end
+      end,
     }
   },
   config = function(_, _)
     require("cmp").setup(g_options())
   end,
-  lazy = false
 }
