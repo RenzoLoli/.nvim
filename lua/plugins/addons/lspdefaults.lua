@@ -13,8 +13,6 @@ M.on_attach = function(client, buffr)
     -- threesitter is better highlight
     client.server_capabilities.semanticTokensProvider = nil
   end
-
-  client.server_capabilities.codeActionProvider.resolveProvider = true
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -7,7 +7,7 @@ M.themes = {
     },
     default = "classic",
     config = function(variant)
-      requir("monokai-pro").setup({filter = variant})
+      require("monokai-pro").setup({filter = variant})
     end
   },
   ["tokyonight"] = {
@@ -16,7 +16,7 @@ M.themes = {
     },
     default = "storm",
     config = function(variant)
-      requir("tokyonight").setup({style = variant})
+      require("tokyonight").setup({style = variant})
     end
   },
   ["gruvbox"] = "",
