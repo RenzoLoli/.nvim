@@ -16,7 +16,7 @@ mapper("n", "<C-w><right>", "<C-w>>", { desc = "resize right" })
 mapper("n", "<C-w><up>", "<C-w>+", { desc = "resize up" })
 mapper("n", "<C-w><down>", "<C-w>-", { desc = "resize down" })
 
--- resize window
+-- move window
 mapper("n", "sh", "<C-w>h", { desc = "split horizontal" })
 mapper("n", "sj", "<C-w>j", { desc = "split vertical" })
 mapper("n", "sk", "<C-w>k", { desc = "split vertical" })

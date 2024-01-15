@@ -8,7 +8,8 @@ local M = {
   "nvim-web-devicons",
   "nvim-tree",
   "nvim-treesitter",
-  "telescope"
+  "telescope",
+  "rust-tools"
 }
 
 return M

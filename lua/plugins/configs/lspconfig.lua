@@ -68,7 +68,6 @@ end
 
 return {
   "neovim/nvim-lspconfig",
-  event = "BufRead",
   dependencies = {
     {
       "hrsh7th/cmp-nvim-lsp"
@@ -86,4 +85,5 @@ return {
     M.setup_servers()
     M.setup()
   end,
+  lazy = false
 }
