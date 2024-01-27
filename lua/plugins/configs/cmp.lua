@@ -118,6 +118,19 @@ function g_options()
       { name = "nvim_lua" },
       { name = "path" },
     },
+    sorting = {
+      priority_weight = 2,
+      comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        require "cmp-under-comparator".under,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+        cmp.config.compare.kind,
+      },
+    },
   }
 end
 
@@ -144,15 +157,32 @@ return {
       "onsails/lspkind.nvim"
     },
     {
-      "L3MON4D3/LuaSnip",
-      dependencies = { "rafamadriz/friendly-snippets" },
-      opts = { history = true, updateevents = "TextChanged, TextchangedI" },
-      config = function(_, opts)
-        require("plugins.configs.luasnip").setup(opts)
-      end,
+      "lukas-reineke/cmp-under-comparator"
     }
   },
   config = function(_, _)
+    local cmp = require("cmp")
+
     require("cmp").setup(g_options())
+
+    cmp.setup.cmdline({ "/", "?" }, {
+      mapping = cmp.mapping.preset.cmdline(),
+      window = { completion = cmp.config.window.bordered({ col_offset = 0 }) },
+      formatting = { fields = { "abbr" } },
+      sources = {
+        { name = "buffer" },
+      },
+    })
+
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline(),
+      window = { completion = cmp.config.window.bordered({ col_offset = 0 }) },
+      formatting = { fields = { "abbr" } },
+      sources = cmp.config.sources({
+        { name = "path" },
+      }, {
+        { name = "cmdline" },
+      }),
+    })
   end,
 }

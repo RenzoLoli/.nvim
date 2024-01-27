@@ -38,6 +38,7 @@ M.setup = function()
     opts.border = "single"
     return opts
   end
+
 end
 
 M.setup_lsp_server = function(server)
@@ -52,6 +53,11 @@ M.setup_lsp_server = function(server)
     return
   end
 
+  if server == "roslyn" then
+    require("roslyn").setup(opts)
+    return
+  end
+
   lsp[server].setup(opts)
 end
 
@@ -61,6 +67,7 @@ M.setup_servers = function()
   local servers = languages.get_servers()
 
   for _, server in ipairs(servers) do
+
     M.setup_lsp_server(server)
   end
 end
@@ -68,9 +75,19 @@ end
 
 return {
   "neovim/nvim-lspconfig",
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     {
-      "hrsh7th/cmp-nvim-lsp"
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    {
+      "Hoffs/omnisharp-extended-lsp.nvim"
+    },
+    {
+      "Decodetalkers/csharpls-extended-lsp.nvim"
+    },
+    {
+      "jmederosalvarado/roslyn.nvim"
     },
     {
       'kosayoda/nvim-lightbulb',
@@ -82,8 +99,7 @@ return {
     }
   },
   config = function(_, _)
-    M.setup_servers()
     M.setup()
+    M.setup_servers()
   end,
-  lazy = false
 }

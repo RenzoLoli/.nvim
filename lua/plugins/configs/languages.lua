@@ -14,6 +14,12 @@ M.all = {
     linter = "clang-tidy"
   },
 
+  ["cs"] = {
+    server = "omnisharp",
+    formatter = "_",
+    linter = "_"
+  },
+
   ["python"] = {
     server = "pyright",
     formatter = "black",
@@ -98,7 +104,7 @@ function to_list(group)
   local set = {}
 
   for _, config in pairs(M.all) do
-    if config[group] and not set[config[group]] then
+    if config[group] and config[group] ~= "_" and not set[config[group]] then
       table.insert(result, config[group])
       set[config[group]] = true
     end

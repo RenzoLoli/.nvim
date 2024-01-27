@@ -1,8 +1,10 @@
 return {
-  setup = function(opts)
-    require("luasnip").config.set_config(opts)
-
+  "L3MON4D3/LuaSnip",
+  dependencies = { "rafamadriz/friendly-snippets" },
+  opts = { history = true, updateevents = "TextChanged, TextchangedI" },
+  config = function(_, opts)
     vim.g.vscode_snippets_path = vim.fn.stdpath("config") .. "/snippets"
+    require("luasnip").config.set_config(opts)
 
     -- vscode format
     require("luasnip.loaders.from_vscode").lazy_load()
@@ -26,5 +28,6 @@ return {
         end
       end,
     })
-  end
+  end,
+  lazy = false
 }
