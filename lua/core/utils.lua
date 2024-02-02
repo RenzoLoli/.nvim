@@ -8,6 +8,37 @@ M.echo = function(str)
   vim.api.nvim_echo({ { str, "bold" } }, true, {})
 end
 
+M.load_json = function(path)
+  if type(path) == "nil" then
+    return {}
+  end
+  local handle = io.open(path)
+  if not handle then
+    return {}
+  end
+  local out = handle:read("*a")
+  handle:close()
+  local config = vim.json.decode(out)
+  if type(config) == "table" then
+    return config
+  end
+  return {}
+end
+
+M.extend_local_file = function(filename)
+  return vim.fn.resolve(vim.fn.getcwd() .. "/./" .. filename)
+end
+
+M.split_text = function (text, sep)
+  vim.api.nvim_command('split')
+  local id = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_lines(id, 0, -1, true, vim.split(text, sep))
+end
+
+M.inspect = function(value)
+  M.split_text(value, "\n")
+end
+
 M.shell_call = function(args)
   local output = fn.system(args)
   assert(vim.ev.shell_error == 0, "External call failed with error code: " .. vim.v.shell_error .. "\n" .. output)

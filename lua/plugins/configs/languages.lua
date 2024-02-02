@@ -8,6 +8,12 @@ M.all = {
     linter = "clang-tidy"
   },
 
+  ["emmet"] = {
+    server = "emmet_ls",
+    formatter = "_",
+    linter = "_"
+  },
+
   ["c"] = {
     server = "clangd",
     formatter = "clang-format",

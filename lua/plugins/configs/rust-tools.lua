@@ -1,22 +1,39 @@
 local on_attach = require("plugins.addons.lspdefaults").on_attach
-
-local function get_project_rustanalyzer_settings()
-  local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
-  if not handle then
-    return {}
-  end
-  local out = handle:read("*a")
-  handle:close()
-  local config = vim.json.decode(out)
-  if type(config) == "table" then
-    return config
-  end
-  return {}
-end
+local utils = require("core.utils")
 
 -- Configure LSP through rust-tools.nvim plugin.
 -- rust-tools will configure and enable certain LSP features for us.
 -- See https://github.com/simrat39/rust-tools.nvim#configuration
+
+local default_analyzer_opts = {
+  cargo = {
+    allFeatures = true,
+    loadOutDirsFromCheck = true,
+    runBuildScripts = true
+  },
+  procMacro = {
+    enable = true,
+    -- ignored = {
+    --   ["async-trait"] = { "async_trait" },
+    --   ["napi-derive"] = { "napi" },
+    --   ["async-recursion"] = { "async_recursion" },
+    -- },
+  },
+  -- enable clippy on save
+  checkOnSave = {
+    allFeatures = true,
+    command = "clippy",
+    extraArgs = { "--no-deps" },
+  },
+}
+
+local config_path = utils.extend_local_file(".rust-analyzer.json")
+local analyzer_opts = vim.tbl_deep_extend(
+  "force",
+  default_analyzer_opts,
+  utils.load_json(config_path)
+)
+
 local opts = {
   tools = {
     runnables = {
@@ -30,54 +47,10 @@ local opts = {
     },
   },
 
-  -- all the opts to send to nvim-lspconfig
-  -- these override the defaults set by rust-tools.nvim
-  -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
   server = {
-    -- on_attach is a callback called when the language server attachs to the buffer
     on_attach = on_attach,
     settings = {
-      -- to enable rust-analyzer settings visit:
-      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-      -- ["rust-analyzer"] = {
-      --   cargo = {
-      --     runBuildScripts = false
-      --   },
-      --   procMacro = {
-      --     enable = true
-      --   },
-      --   -- enable clippy on save
-      --   checkOnSave = {
-      --     command = "clippy",
-      --   },
-      -- },
-      ['rust-analyzer'] = vim.tbl_deep_extend(
-        "force",
-        {
-          cargo = {
-            allFeatures = true,
-            loadOutDirsFromCheck = true,
-            runBuildScripts = true
-          },
-          procMacro = {
-            enable = true,
-            ignored = {
-              ["async-trait"] = { "async_trait" },
-              ["napi-derive"] = { "napi" },
-              ["async-recursion"] = { "async_recursion" },
-            },
-          },
-          -- enable clippy on save
-          checkOnSave = {
-            allFeatures = true,
-            command = "clippy",
-            extraArgs = { "--no-deps" },
-          },
-        },
-        get_project_rustanalyzer_settings(),
-        {
-        }
-      )
+      ['rust-analyzer'] = analyzer_opts
     },
   },
 }

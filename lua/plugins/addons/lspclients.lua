@@ -15,5 +15,7 @@ M.statusline_clients = function()
   return text
 end
 
+M.load_client = function ()
+end
 
 return  M
