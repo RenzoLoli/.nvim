@@ -18,13 +18,13 @@ return {
   },
   {
     "mbbill/undotree",
-    event = "InsertEnter",
     config = function(_, _)
       vim.cmd [[
         let g:undotree_WindowLayout = 2
         let g:undotree_SetFocusWhenToggle = 1
       ]]
     end,
+    event = "InsertEnter",
     lazy = false,
   },
   {
@@ -41,6 +41,12 @@ return {
       local cmp_autopairs = require "nvim-autopairs.completion.cmp"
       require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
   },
   {
     "numToStr/Comment.nvim",
