@@ -89,14 +89,6 @@ return {
     {
       "jmederosalvarado/roslyn.nvim"
     },
-    {
-      'kosayoda/nvim-lightbulb',
-      config = function(_, _)
-        require("nvim-lightbulb").setup({
-          autocmd = { enabled = true }
-        })
-      end
-    }
   },
   config = function(_, _)
     M.setup()
