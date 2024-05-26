@@ -39,13 +39,13 @@ return {
       "nvim-telescope/telescope.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      require("octo").setup()
+    config = function(_, opts)
+      require("octo").setup(opts)
     end,
     opts = {
-      { suppress_missing_scope = {
+      suppress_missing_scope = {
         projects_v2 = true,
-      } },
+      },
     },
   },
   {

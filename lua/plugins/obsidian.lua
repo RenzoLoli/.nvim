@@ -1,5 +1,12 @@
+local path = "/mnt/d/obsidian"
+if not vim.fn.isdirectory(path) then
+  print("Please change obsidian path!")
+  path = ""
+end
+
 return {
   "epwalsh/obsidian.nvim",
+  enabled = path ~= "",
   version = "*", -- recommended, use latest release instead of latest commit
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -7,8 +14,8 @@ return {
   opts = {
     workspaces = {
       {
-        name = "GentlemanNotes",
-        path = "/mnt/d/obsidian",
+        name = "ZoreNotes",
+        path = path,
       },
     },
     completion = {
