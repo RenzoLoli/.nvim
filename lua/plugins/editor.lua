@@ -60,6 +60,12 @@ return {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
       },
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+      },
       "nvim-telescope/telescope-file-browser.nvim",
     },
     keys = {
@@ -169,6 +175,18 @@ return {
           n = {},
         },
       })
+      --
+      -- opts.defaults.vimgrep_arguments = vim.tbl_deep_extend("force", opts.defaults.vimgrep_arguments or {}, {
+      --   "rg",
+      --   "--color=never", -- disable color
+      --   "--no-heading", -- disable header
+      --   "--with-filename", -- include file name
+      --   "--line-number", -- include line number
+      --   "--column", -- include column number
+      --   "--smart-case", -- case insensitive
+      --   "--ignore-file=.gitignore", -- ignore .gitignore
+      -- })
+
       opts.pickers = {
         diagnostics = {
           theme = "ivy",
@@ -209,8 +227,10 @@ return {
         },
       }
       telescope.setup(opts)
+
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
+      require("telescope").load_extension("live_grep_args")
     end,
   },
 }
