@@ -3,6 +3,7 @@ local M = {}
 local Popup = require("nui.popup")
 local event = require("nui.utils.autocmd").event
 
+---@param opts nui_popup_options
 M.create_popup = function(opts)
   ---@type nui_popup_options
   local base_opts = {
@@ -39,6 +40,7 @@ M.create_popup = function(opts)
   return popup
 end
 
+---@param opts nui_popup_options
 M.popup = function(text, opts)
   local popup = M.create_popup(opts)
   popup:mount()
