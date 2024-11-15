@@ -33,22 +33,6 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
   },
   {
-    "pwntester/octo.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function(_, opts)
-      require("octo").setup(opts)
-    end,
-    opts = {
-      suppress_missing_scope = {
-        projects_v2 = true,
-      },
-    },
-  },
-  {
     "mattn/vim-gist",
     event = "BufRead",
     dependencies = "mattn/webapi-vim",

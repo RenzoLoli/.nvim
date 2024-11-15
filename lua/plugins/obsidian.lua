@@ -1,7 +1,8 @@
-local path = "/mnt/d/obsidian"
-if not vim.fn.isdirectory(path) then
-  print("Please change obsidian path!")
-  path = ""
+local path = vim.fn.stdpath("data") .. "/obsidian"
+
+if vim.fn.isdirectory(path) == 0 then
+  -- TODO: check obsidian path
+  vim.fn.mkdir(path, "p")
 end
 
 return {
@@ -14,7 +15,7 @@ return {
   opts = {
     workspaces = {
       {
-        name = "ZoreNotes",
+        name = "Global Notes",
         path = path,
       },
     },
